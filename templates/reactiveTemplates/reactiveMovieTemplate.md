@@ -2,8 +2,9 @@
 
 # `$= dv.current().title`
 
-> [!INFO] Status
-> `$= dv.current().watched ? 'last watched on ' + dv.current().lastWatched : 'not yet watched'`
+```dataviewjs
+dv.paragraph(`> [!${dv.current().watched ? 'SUCCESS' : 'WARNING'}] ${dv.current().watched ? 'last watched on ' + dv.current().lastWatched : 'not yet watched'}`)
+```
 
 `$= dv.current().watched ? '**Rating**: ' + dv.current().personalRating + ' out of 10' : ''`
 
