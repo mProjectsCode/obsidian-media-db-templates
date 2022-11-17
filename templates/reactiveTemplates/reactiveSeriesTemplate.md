@@ -3,13 +3,19 @@
 # `$= dv.current().title`
 
 ```dataviewjs
-dv.paragraph(`> [!${dv.current().watched ? 'SUCCESS' : 'WARNING'}] ${dv.current().watched ? 'last watched on ' + dv.current().lastWatched : 'not yet watched'}`)
+if (dv.current().watched) {
+	dv.paragraph(`> [!SUCCESS] \`INPUT[toggle:watched]\` watched \n last watched on ${dv.current().lastWatched || '---'}`);
+} else {
+	dv.paragraph(`> [!WARNING] \`INPUT[toggle:watched]\` not yet watched`);
+}
 ```
 
-`$= dv.current().watched ? '**Rating**: ' + dv.current().personalRating + ' out of 10' : ''`
+**Rating**:  `INPUT[slider(addLabels, minValue(0), maxValue(10)):personalRating]` (`$= dv.current().personalRating` out of 10)
 
 **Genres**:
-`$= dv.current().genres.length === 0 ? ' - none' : dv.list(dv.current().genres)`
+```dataviewjs
+dv.current().genres.length === 0 ? dv.span(' - none') : dv.list(dv.current().genres)
+```
 
 ```dataviewjs
 let text = '';
